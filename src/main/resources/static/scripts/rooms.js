@@ -34,9 +34,9 @@ const CleanRoomsTable = () => {
 
 const ListTheRoom = () => {
   CleanRoomsTable();
-  postRequest('/room/delete', '')
-    .then(result => console.log(result))
-    .catch(err => console.warn('POST Error:', err));
+  // postRequest('/room/delete', '')
+  //   .then(result => console.log(result))
+  //   .catch(err => console.warn('POST Error:', err));
 
   for (let i = 1; i <= roomsData.length; i++) {
     const row = `

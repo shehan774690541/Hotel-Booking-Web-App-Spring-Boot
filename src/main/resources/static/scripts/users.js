@@ -1,35 +1,5 @@
 
 const userTableBody = document.querySelector("#userDataTable tbody");
-var usersData = [
-  {
-    userId: 1,
-    fullName: "user full name",
-    position: "Administrator",
-    password: "1234",
-    editable: true,
-  },
-  {
-    userId: 2,
-    fullName: "user full name",
-    position: "Receptionist",
-    password: "1234",
-    editable: true,
-  },
-  {
-    userId: 3,
-    fullName: "user full name",
-    position: "Receptionist",
-    password: "1234",
-    editable: true,
-  },
-  {
-    userId: 4,
-    fullName: "user full name",
-    position: "Manager",
-    password: "1234",
-    editable: false,
-  },
-];
 
 const CleanUsers = () => {
   if (userTableBody) {
@@ -37,20 +7,20 @@ const CleanUsers = () => {
   }
 }
 
-const ListUsers = () => {
+const ListUsers = async() => {
+  
   CleanUsers();
-  postRequest('/user/delete', '')
-    .then(result => console.log(result))
-    .catch(err => console.warn('POST Error:', err));
+  const result = await postRequest('api/users/list', null);
+  var usersData = result;
 
-  for (let i = 1; i <= usersData.length; i++) {
+  for (let i = 1; i <= usersData.data.length; i++) {
     const row = `
-      <tr>
-        <td>${usersData[i - 1].fullName}</td>
-        <td>${usersData[i - 1].position}</td>
-        <td>${userManagement(usersData[i - 1], i)}</td>
-      </tr>
-    `;
+        <tr>
+          <td>${usersData.data[i - 1].fullName}</td>
+          <td>${usersData.data[i - 1].position}</td>
+          <td>${userManagement(usersData.data[i - 1], i)}</td>
+        </tr>
+      `;
     userTableBody.innerHTML += row;
   }
 }

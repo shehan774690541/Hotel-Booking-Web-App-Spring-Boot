@@ -1,8 +1,8 @@
-const baseUrl = 'http://192.168.194.155:5000';
+const baseUrl = 'api/users/list';
 
 async function postRequest(url, data) {
   try {
-    const response = await fetch(`${baseUrl}${url}`, {
+    const response = await fetch(`${url}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
