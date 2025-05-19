@@ -42,7 +42,7 @@ const deleteTheUser = (i) => {
   const data = {
     id: i
   }
-  postRequest('/user/delete', data)
+  postRequest('api/users/delete', data)
     .then(result => console.log('Result:', result))
     .catch(err => console.warn('POST Error:', err));
 

@@ -1,8 +1,10 @@
 package com.example.hotelbooking.controller;
 
+import com.example.hotelbooking.dto.UserDeleteDto;
 import com.example.hotelbooking.dto.UserDto;
 import com.example.hotelbooking.entity.User;
 import com.example.hotelbooking.response.ApiResponse;
+import com.example.hotelbooking.entity.BaseResponce;
 import com.example.hotelbooking.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -26,14 +28,14 @@ public class UserController {
         return service.listUsers();
     }
 
-    @PutMapping("/{id}")
-    public ApiResponse edit(@PathVariable int id, @RequestBody UserDto dto) {
-        return new ApiResponse(service.editUser(id, dto));
-    }
-
-    @DeleteMapping("/{id}")
-    public ApiResponse delete(@PathVariable int id) {
-        return new ApiResponse(service.deleteUser(id));
+    // Endpoint to delete a user: POST /api/users/delete
+    // Example JSON request body:
+    // {
+    //   "userId": 123
+    // }
+    @PostMapping("/delete")
+    public BaseResponce delete(@RequestBody UserDeleteDto dto) {
+        return service.deleteUser(dto);
     }
 
     @GetMapping

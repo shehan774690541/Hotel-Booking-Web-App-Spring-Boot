@@ -1,8 +1,8 @@
-const baseUrl = 'api/users/list';
+const baseUrl = '';
 
 async function postRequest(url, data) {
   try {
-    const response = await fetch(`${url}`, {
+    const response = await fetch(`${baseUrl}${url}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,6 +1,8 @@
 package com.example.hotelbooking.service;
 
 import com.example.hotelbooking.dto.UserDto;
+import com.example.hotelbooking.dto.UserDeleteDto;
+import com.example.hotelbooking.entity.BaseResponce;
 import com.example.hotelbooking.entity.User;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -54,20 +56,13 @@ public class UserService {
         return "User added successfully";
     }
 
-    public String editUser(int id, UserDto dto) {
-        for (User u : users) {
-            if (u.userId == id) {
-                u.fullName = dto.fullName;
-                u.editable = dto.editable;
-                return "User edited successfully";
-            }
-        }
-        return "User not found";
-    }
-
-    public String deleteUser(int id) {
-        users.removeIf(u -> u.userId == id);
-        return "User deleted successfully";
+    public BaseResponce deleteUser(UserDeleteDto dto) {
+        BaseResponce responce = new BaseResponce();
+        List<Object> deletedUsers = new ArrayList<>();
+        deletedUsers.add(dto); //String.format("User Delete %s", dto.id)
+        responce.data = deletedUsers;
+        responce.statusCode = 200;
+        return responce;
     }
 
     public List<User> listUsers() {
